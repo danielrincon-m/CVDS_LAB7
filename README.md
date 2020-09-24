@@ -4,6 +4,6 @@
 ## _Github_
 ### PARTE I
 
-1. Resultado de la consulta
+2. Resultado de la consulta
 
     ![consulta sql](/img/consulta.jpg)
