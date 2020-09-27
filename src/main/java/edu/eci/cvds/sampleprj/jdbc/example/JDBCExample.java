@@ -56,12 +56,10 @@ public class JDBCExample {
             }
             System.out.println("-----------------------");
             
-            
             int suCodigoECI=3104342;
-            registrarNuevoProducto(con, suCodigoECI, "Daniel Rincón", 101);            
-            con.commit();
-                        
+            registrarNuevoProducto(con, suCodigoECI, "Daniel Rincón", 101);
             
+            con.commit();            
             con.close();
                                    
         } catch (ClassNotFoundException | SQLException ex) {
