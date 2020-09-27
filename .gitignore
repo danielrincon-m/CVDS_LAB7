@@ -58,6 +58,7 @@ bin/
 out/
 server/
 .jqwik-database
+*.code-workspace
 
 jdtls/
 
