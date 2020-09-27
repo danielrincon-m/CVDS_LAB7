@@ -16,15 +16,22 @@
  */
 package edu.eci.cvds.samples.services.client;
 
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.TipoItem;
 
 /**
  *
@@ -33,8 +40,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class MyBatisExample {
 
     /**
-     * Método que construye una fábrica de sesiones de MyBatis a partir del
-     * archivo de configuración ubicado en src/main/resources
+     * Método que construye una fábrica de sesiones de MyBatis a partir del archivo
+     * de configuración ubicado en src/main/resources
      *
      * @return instancia de SQLSessionFactory
      */
@@ -54,29 +61,46 @@ public class MyBatisExample {
 
     /**
      * Programa principal de ejempo de uso de MyBATIS
+     * 
      * @param args
-     * @throws SQLException 
+     * @throws SQLException
+     * @throws ParseException
      */
-    public static void main(String args[]) throws SQLException {
+    public static void main(String args[]) throws SQLException, ParseException {
         SqlSessionFactory sessionfact = getSqlSessionFactory();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         SqlSession sqlss = sessionfact.openSession();
 
+        // Crear el mapper y usarlo:
+        ClienteMapper cm = sqlss.getMapper(ClienteMapper.class);
+        ItemMapper im = sqlss.getMapper(ItemMapper.class);
+
         
-        //Crear el mapper y usarlo: 
-        //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
-        //cm...
-        
-        
-        
+        // Consultar todos los clientes
+        System.out.println(cm.consultarClientes());
+
+        // Consultar un cliente por documento
+        // System.out.println(cm.consultarCliente(-703));
+
+        // Insertar un item rentado
+        // cm.agregarItemRentadoACliente(-703, 99, dateFormat.parse("2020-09-26"),
+        // dateFormat.parse("2021-09-26"));
+
+        // Insertar un nuevo item
+        // TipoItem tipoItem = new TipoItem(4, "virus");
+        // Item item = new Item(tipoItem, 1000002, "aaa", "aaaaaaaaaaa", dateFormat.parse("2020-09-26"), 44444, "a",
+        //         "aaaaaaa");
+        // im.insertarItem(item);
+
+        // Consultar todos los items
+        // System.out.println(im.consultarItems());
+
+        // Consultar item por id
+        // System.out.println(im.consultarItem(1));
+
+
         sqlss.commit();
-        
-        
         sqlss.close();
-
-        
-        
     }
-
-
 }

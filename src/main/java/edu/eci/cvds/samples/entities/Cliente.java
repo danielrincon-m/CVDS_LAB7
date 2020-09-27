@@ -42,7 +42,6 @@ public class Cliente implements Serializable{
         this.vetado = false;
         this.rentados = new ArrayList<>();
     }
-
            
     public String getNombre() {
         return nombre;
